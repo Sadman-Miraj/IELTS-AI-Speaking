@@ -81,7 +81,7 @@ vercel --prod
 ```
 
 Vercel gives you a live URL like:
-**https://ielts-speaking-app-xxx.vercel.app**
+**https://ielts-ai-speaking.vercel.app/**
 
 Share this link with anyone — it works on desktop Chrome and Android Chrome.
 
