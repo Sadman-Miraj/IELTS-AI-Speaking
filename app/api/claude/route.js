@@ -9,7 +9,6 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
-    // Convert your frontend request into a single prompt
     const systemPrompt = body.system || "";
 
     const messages = (body.messages || [])
@@ -18,29 +17,25 @@ export async function POST(request) {
 
     const prompt = `${systemPrompt}\n\n${messages}`;
 
-const result = await ai.models.generateContent({
-  model: "gemini-2.5-flash-lite",
-  contents: prompt,
-});
+    const result = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
+    });
 
-const text = result.text;
-
-    // Return in Anthropic-compatible format
     return NextResponse.json({
       content: [
         {
-          text: text,
+          text: result.text,
         },
       ],
     });
-
   } catch (error) {
-    console.error("Gemini Error:", error);
+    console.error(error);
 
     return NextResponse.json(
       {
         error: {
-          message: error.message || "Unknown error",
+          message: error.message,
         },
       },
       { status: 500 }
